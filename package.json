@@ -36,12 +36,17 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jquery": "^3.1.1",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.4",
     "prop-types": "^15.7.2",
     "react": "^17.0.0",
     "react-chartjs-2": "^3.0.3",
     "react-dom": "^17.0.0",
     "react-material-ui-carousel": "^2.2.6",
     "react-zoom-pan-pinch": "^2.0.2",
+    "save": "^2.4.0",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.2.0"
   }
