@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require('express');
 const dbQueries = require('../product-display/models/index');
 
@@ -7,6 +8,7 @@ router.get('/products', (req, res) => {
   dbQueries.getAllProducts((err, data) => {
     if (err) {
       res.status(404).send(err);
+      console.log('err getting products', err);
     } else {
       res.status(200).send(data);
     }
@@ -14,9 +16,32 @@ router.get('/products', (req, res) => {
 });
 
 router.get('/products/:product_id', (req, res) => {
-  dbQueries.getProductData(req.params.product_id, (err, data) => {
+  dbQueries.getProductData(parseInt(req.params.product_id, 10), (err, data) => {
     if (err) {
       res.status(404).send(err);
+      console.log('err getting product data', err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+router.get('/products/:product_id/styles', (req, res) => {
+  dbQueries.getProductStyle(parseInt(req.params.product_id, 10), (err, data) => {
+    if (err) {
+      res.status(404).send(err);
+      console.log('err getting product styles', err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+router.get('/products/:product_id/related', (req, res) => {
+  dbQueries.getRelated(parseInt(req.params.product_id, 10), (err, data) => {
+    if (err) {
+      res.status(404).send(err);
+      console.log('err getting related', err);
     } else {
       res.status(200).send(data);
     }
