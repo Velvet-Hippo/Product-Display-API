@@ -27,11 +27,21 @@ router.get('/products/:product_id', (req, res) => {
 });
 
 router.get('/products/:product_id/styles', (req, res) => {
-  console.log(parseInt(req.params.product_id, 10));
   dbQueries.getProductStyle(parseInt(req.params.product_id, 10), (err, data) => {
     if (err) {
       res.status(404).send(err);
       console.log('err getting product styles', err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+router.get('/products/:product_id/related', (req, res) => {
+  dbQueries.getRelated(parseInt(req.params.product_id, 10), (err, data) => {
+    if (err) {
+      res.status(404).send(err);
+      console.log('err getting related', err);
     } else {
       res.status(200).send(data);
     }
