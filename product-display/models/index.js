@@ -20,7 +20,7 @@ const getAllProducts = (cb) => {
   EXPLAIN ANALYZE
   SELECT *
   FROM products
-  LIMIT 5;`;
+  LIMIT 10000;`;
   pool.query(queryString, (err, results) => {
     if (err) {
       cb(err, null);
@@ -39,7 +39,7 @@ const getProductData = (product_id, cb) => {
    jsonb_agg(json_build_object('feature', features.feature_name, 'value', features.value))
    AS features
    FROM products JOIN features on features.product_id = products.id
-   WHERE products.id = $1
+   WHERE products.id = 1
    GROUP BY products.id;`;
   pool.query(queryString, [product_id], (err, results) => {
     if (err) {
