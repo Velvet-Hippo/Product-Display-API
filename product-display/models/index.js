@@ -17,10 +17,9 @@ pool.connect((err) => {
 
 const getAllProducts = (cb) => {
   const queryString = `
-  EXPLAIN ANALYZE
   SELECT *
   FROM products
-  LIMIT 5;`;
+  LIMIT 10000;`;
   pool.query(queryString, (err, results) => {
     if (err) {
       cb(err, null);
@@ -34,7 +33,6 @@ const getAllProducts = (cb) => {
 const getProductData = (product_id, cb) => {
   // eslint-disable-next-line quotes
   const queryString = `
-  EXPLAIN ANALYZE
   SELECT products.id, name, slogan, description, category, default_price,
    jsonb_agg(json_build_object('feature', features.feature_name, 'value', features.value))
    AS features
@@ -54,7 +52,6 @@ const getProductData = (product_id, cb) => {
 const getProductStyle = (product_id, cb) => {
   // eslint-disable-next-line quotes
   const queryString = `
-  EXPLAIN ANALYZE
   SELECT styles.style_id, style_name, sale_price, original_price, default_style,
   jsonb_agg(json_build_object('thumbnail_url', photos.thumbnail_url, 'url', photos.url))
   AS photos, json_object_agg('skus_id', json_build_object('quantity', skus.quantity, 'size', skus.size))
@@ -77,7 +74,6 @@ const getProductStyle = (product_id, cb) => {
 
 const getRelated = (product_id, cb) => {
   const queryString = `
-  EXPLAIN ANALYZE
   SELECT jsonb_agg(related.related_product_id)
   AS related
   FROM related
